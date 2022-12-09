@@ -26,6 +26,6 @@ I am using Firebase authentication and Firebase Realtime database. Realtime data
 
 # Future Work
 
-* Link To Do list items to user that is signed in so that users can only view their own to do list items
+* Link To Do list items to user that is signed in so that users can only view their own tasks
 * Add a sign out button
 * Add the ability to schedule when a to do list item needs to be done by, working with notifications when it hits that time in local time.
