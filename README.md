@@ -19,18 +19,19 @@
 # Development Environment
 
 {Describe the tools that you used to develop the software}
-
-{Describe the programming language that you used and any libraries.}
+* Android Studio
+* Kotlin
+* Google Firebase Authentication
+* Google Firebase Realtime Database
 
 # Useful Websites
 
-{Make a list of websites that you found helpful in this project}
-* [Web Site Name](http://url.link.goes.here)
-* [Web Site Name](http://url.link.goes.here)
+* [Firebase Read and Write Documentation](https://firebase.google.com/docs/database/android/read-and-write#kotlin+ktx)
+* [Firebase Get/Set Tutorial](https://www.youtube.com/watch?v=rg5WToMepJQ&ab_channel=Dr.ParagShukla)
+* [Firebase Authentication Documentation](https://firebase.google.com/docs/auth/android/start)
 
 # Future Work
 
-{Make a list of things that you need to fix, improve, and add in the future.}
-* Item 1
-* Item 2
-* Item 3
+* Link To Do list items to user that is signed in so that users can only view their own to do list items
+* Add a sign out button
+* Add the ability to schedule when a to do list item needs to be done by, working with notifications when it hits that time in local time.
