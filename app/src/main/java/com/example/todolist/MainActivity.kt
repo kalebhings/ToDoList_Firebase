@@ -4,12 +4,17 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.SparseBooleanArray
-import android.widget.ArrayAdapter
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ListView
+import android.widget.*
+import androidx.core.view.get
+import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.ktx.database
+import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
 class MainActivity : AppCompatActivity() {
@@ -21,6 +26,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         auth = FirebaseAuth.getInstance()
+        val db = FirebaseDatabase.getInstance().reference
 
         // Assign values of the buttons to variable
         val add = findViewById<Button>(R.id.add)
@@ -37,16 +43,32 @@ class MainActivity : AppCompatActivity() {
         var itemList = arrayListOf<String>()
         var adapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_multiple_choice, itemList)
 
+        var getData = object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                for (i in snapshot.children) {
+                    var itemName = i.child("task").getValue().toString()
+                    if (! itemList.contains(itemName))
+                        itemList.add(itemName)
+                        listView.adapter = adapter
+                        adapter.notifyDataSetChanged()
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+
+            }
+        }
+
         // Adding the items to the list when the add button is pressed
         add.setOnClickListener {
-            itemList.add(editText.text.toString())
-            listView.adapter = adapter
-            adapter.notifyDataSetChanged()
+            var item: String = editText.text.toString()
+            db.child(item + "1").setValue(Tasks(item))
             editText.text.clear()
         }
 
         // Clear the list when the clear button is pressed
         clear.setOnClickListener {
+            db.removeValue()
             itemList.clear()
             adapter.notifyDataSetChanged()
         }
@@ -60,6 +82,9 @@ class MainActivity : AppCompatActivity() {
             while (item >= 0) {
                 if (position.get(item))
                 {
+                    var result = itemList.get(item)
+                    db.child(result).child(result).setValue(null)
+                    db.child(result + "1").setValue(null)
                     adapter.remove(itemList.get(item))
                 }
                 item--
@@ -67,6 +92,10 @@ class MainActivity : AppCompatActivity() {
             position.clear()
             adapter.notifyDataSetChanged()
         }
+
+
+        db.addValueEventListener(getData)
+        db.addListenerForSingleValueEvent(getData)
     }
 
     public override fun onStart() {
