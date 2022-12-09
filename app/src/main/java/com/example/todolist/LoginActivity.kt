@@ -27,16 +27,20 @@ class LoginActivity : AppCompatActivity() {
         passInput = findViewById(R.id.password)
 
         signIn.setOnClickListener {
+            // Gets the values after the button is clicked
             val email = emailInput.text.toString()
             val password = passInput.text.toString()
 
+            // If the fields aren't empty, then move on
             if (email.isNotEmpty() && password.isNotEmpty()) {
                 auth.signInWithEmailAndPassword(email, password).addOnCompleteListener {
+                    // If signing in is successful, send to MainActivity
                     if (it.isSuccessful) {
                         val login = Intent(this, MainActivity::class.java)
                         startActivity(login)
                     }
                     else {
+                        // If not successful in signing in, give an exception through a Toast message to the user
                         Toast.makeText(this, it.exception.toString(), Toast.LENGTH_SHORT).show()
                     }
                 }
@@ -46,6 +50,7 @@ class LoginActivity : AppCompatActivity() {
             }
         }
 
+        // Take user to the Registration activity on button press
         registerButton.setOnClickListener {
             val register = Intent(this, RegisterActivity::class.java)
             startActivity(register)
