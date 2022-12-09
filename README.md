@@ -1,20 +1,14 @@
 # Overview
 
-{Important!  Do not say in this section that this is college assignment.  Talk about what you are trying to accomplish as a software engineer to further your learning.}
+I created this application in Android to learn how to connect a Cloud database to an Android application to make the app more practical so that the data can be accessed after the app is closed and on a different phone. I also wanted to learn how to utilize authentication because that is becoming more and more important in today's day to be safe. 
 
-{Provide a description the software that you wrote and how it integrates with a Cloud Database.  Describe how to use your program.}
+The app uses Firebase authentication for creating the logins and for signing in. It also utilizes Realtime database on Firebase to add the tasks from the to do list to the database and pull them when the app reopens so that the tasks are saved. It also has the ability to remove only the selected or clear all the tasks from the database and on the screen.
 
-{Describe your purpose for writing this software.}
-
-{Provide a link to your YouTube demonstration.  It should be a 4-5 minute demo of the software running, a walkthrough of the code, and a view of the cloud database.}
-
-[Software Demo Video](http://youtube.link.goes.here)
+[Software Demo Video](https://www.youtube.com/watch?v=bDVOFFLGhy0&ab_channel=KalebHings)
 
 # Cloud Database
 
-{Describe the cloud database you are using.}
-
-{Describe the structure of the database that you created.}
+I am using Firebase authentication and Firebase Realtime database. Realtime database isn't as advanced as Firebase firestore, another cloud database. However it works perfectly for what I needed since I didn't need the advanced query features. The database has 1 value and then the identifier to pull the task. 
 
 # Development Environment
 
